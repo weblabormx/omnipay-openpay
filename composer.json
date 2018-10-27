@@ -1,5 +1,5 @@
 {
-    "name": "ptuchik/omnipay-idram",
+    "name": "weblabormx/omnipay-openpay",
     "type": "library",
     "description": "iDram gateway for Omnipay payment processing library",
     "keywords": [
@@ -8,20 +8,20 @@
         "omnipay",
         "pay",
         "payment",
-        "idram",
+        "openpay",
         "purchase"
     ],
-    "homepage": "https://github.com/ptuchik/omnipay-idram",
+    "homepage": "https://github.com/weblabormx/omnipay-openpay",
     "license": "MIT",
     "authors": [
         {
-            "name": "Avik Aghajanyan",
-            "email": "avik.aghajanyan@gmail.com"
+            "name": "Carlos Escobar",
+            "email": "carlosescobar@weblabor.mx"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Omnipay\\Idram\\": "src/"
+            "Omnipay\\OpenPay\\": "src/"
         }
     },
     "require": {

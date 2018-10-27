@@ -1,12 +1,12 @@
 <?php
 
-namespace Omnipay\Idram\Message;
+namespace Omnipay\OpenPay\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
 
 /**
  * Class PurchaseRequest
- * @package Omnipay\Idram\Message
+ * @package Omnipay\OpenPay\Message
  */
 class PurchaseRequest extends AbstractRequest
 {
@@ -117,7 +117,7 @@ class PurchaseRequest extends AbstractRequest
      *
      * @param mixed $data
      *
-     * @return \Omnipay\Common\Message\ResponseInterface|\Omnipay\Idram\Message\PurchaseResponse
+     * @return \Omnipay\Common\Message\ResponseInterface|\Omnipay\OpenPay\Message\PurchaseResponse
      */
     public function sendData($data)
     {

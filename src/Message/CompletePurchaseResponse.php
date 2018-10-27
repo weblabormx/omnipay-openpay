@@ -1,12 +1,12 @@
 <?php
 
-namespace Omnipay\Idram\Message;
+namespace Omnipay\OpenPay\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
  * Class CompletePurchaseResponse
- * @package Omnipay\Idram\Message
+ * @package Omnipay\OpenPay\Message
  */
 class CompletePurchaseResponse extends AbstractResponse
 {

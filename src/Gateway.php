@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnipay\Idram;
+namespace Omnipay\OpenPay;
 
 use Omnipay\Common\Http\ClientInterface;
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Idram\Message\CompletePurchaseRequest;
-use Omnipay\Idram\Message\PurchaseRequest;
+use Omnipay\OpenPay\Message\CompletePurchaseRequest;
+use Omnipay\OpenPay\Message\PurchaseRequest;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
@@ -19,7 +19,7 @@ class Gateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'Idram';
+        return 'OpenPay';
     }
 
     /**

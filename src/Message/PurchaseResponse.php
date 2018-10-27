@@ -1,13 +1,13 @@
 <?php
 
-namespace Omnipay\Idram\Message;
+namespace Omnipay\OpenPay\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
  * Class PurchaseResponse
- * @package Omnipay\Idram\Message
+ * @package Omnipay\OpenPay\Message
  */
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {

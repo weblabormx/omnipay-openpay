@@ -1,12 +1,12 @@
-# Omnipay: iDram
+# Omnipay: OpenPay
 
-**iDram driver for the Omnipay Laravel payment processing library**
+**OpenPay driver for the Omnipay Laravel payment processing library**
 
-[![Latest Stable Version](https://poser.pugx.org/ptuchik/omnipay-idram/version.png)](https://packagist.org/packages/ptuchik/omnipay-idram)
-[![Total Downloads](https://poser.pugx.org/ptuchik/omnipay-idram/d/total.png)](https://packagist.org/packages/ptuchik/omnipay-idram)
+[![Latest Stable Version](https://poser.pugx.org/weblabormx/omnipay-openpay/version.png)](https://packagist.org/packages/weblabormx/omnipay-openpay)
+[![Total Downloads](https://poser.pugx.org/weblabormx/omnipay-openpay/d/total.png)](https://packagist.org/packages/weblabormx/omnipay-openpay)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.5+. This package implements iDram support for Omnipay.
+processing library for PHP 5.5+. This package implements OpenPay support for Omnipay.
 
 ## Installation
 
@@ -16,7 +16,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "ptuchik/omnipay-idram": "~1.0"
+        "weblabormx/omnipay-openpay": "*"
     }
 }
 ```
@@ -27,7 +27,7 @@ And run composer to update your dependencies:
 
 Or you can simply run
 
-    composer require ptuchik/omnipay-idram
+    composer require weblabormx/omnipay-openpay
 
 ## Basic Usage
 
@@ -37,11 +37,11 @@ Or you can simply run
     use Omnipay\Omnipay;
 ```
 
-2. Initialize iDram gateway:
+2. Initialize OpenPay gateway:
 
 ```php
 
-    $gateway = Omnipay::create('Idram');
+    $gateway = Omnipay::create('OpenPay');
     $gateway->setAccountId(env('ACCOUNT_ID'));
     $gateway->setSecretKey(env('SECRET_KEY'));
     $gateway->setLanguage(\App::getLocale()); // Language
@@ -50,7 +50,7 @@ Or you can simply run
 
 ```
 
-3. Call purchase, it will automatically redirect to iDram's hosted page
+3. Call purchase, it will automatically redirect to OpenPay's hosted page
 
 ```php
 
@@ -63,7 +63,7 @@ Or you can simply run
 
 ```php
 
-    $gateway = Omnipay::create('Idram');
+    $gateway = Omnipay::create('OpenPay');
     $gateway->setAccountId(env('ACCOUNT_ID'));
     $gateway->setSecretKey(env('SECRET_KEY'));
     
@@ -93,5 +93,5 @@ If you want to keep up to date with release anouncements, discuss ideas for the 
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
 you can subscribe to.
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/ptuchik/omnipay-idram/issues),
+If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/weblabormx/omnipay-openpay/issues),
 or better yet, fork the library and submit a pull request.
