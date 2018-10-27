@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnipay\OpenPay;
+namespace WeblaborMx\OmniPayOpenPay;
 
 use Omnipay\Common\Http\ClientInterface;
 use Omnipay\Common\AbstractGateway;
-use Omnipay\OpenPay\Message\CompletePurchaseRequest;
-use Omnipay\OpenPay\Message\PurchaseRequest;
+use WeblaborMx\OmniPayOpenPay\Message\CompletePurchaseRequest;
+use WeblaborMx\OmniPayOpenPay\Message\PurchaseRequest;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
