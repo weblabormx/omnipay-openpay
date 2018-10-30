@@ -99,7 +99,8 @@ class PurchaseRequest extends AbstractRequest
 
     public function processPayment() 
     {
-        $openpay = \Openpay::getInstance($this->getApiKey(), $this->getSecretKey());
+        $key = $this->getApiKey();
+        $openpay = \Openpay::getInstance($key, $this->getSecretKey());
         \Openpay::setProductionMode(!$this->getTestMode());
         
         $customer = array(
@@ -129,17 +130,17 @@ class PurchaseRequest extends AbstractRequest
             return $charge->payment_method->url;
         }
 
-        if(!$this->is_production) { 
+        if($this->getTestMode()) { 
             $link = 'https://sandbox-dashboard.openpay.mx'; 
         } else { 
             $link = 'https://dashboard.openpay.mx';
         }
 
         if($type=='bank_account') {
-            return "{$link}/spei-pdf/{$this->key}/{$charge->id}";
+            return "{$link}/spei-pdf/{$key}/{$charge->id}";
         }
         if($type=='store') {
-            return "{$link}/paynet-pdf/{$this->key}/{$charge->payment_method->reference}";
+            return "{$link}/paynet-pdf/{$key}/{$charge->payment_method->reference}";
         }
 
         throw new \Exception("Method Incorrect, you should choose between card, bank_account and store", 1);
