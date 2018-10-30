@@ -79,10 +79,7 @@ class PurchaseRequest extends AbstractRequest
     public function getData()
     {
         $this->validate('amount', 'returnUrl', 'apiKey', 'secretKey', 'testMode', 'description', 'paymentMethod', 'name', 'email');
-        $url = $this->processPayment();
-        return [
-            'url' => $url
-        ];
+        return $this->processPayment();
     }
 
     /**
@@ -116,7 +113,7 @@ class PurchaseRequest extends AbstractRequest
             'amount'      => (double) $this->getAmount(),
             'description' => $this->getDescription(),
             'send_email'  => false,
-            'order_id'    => $this->getTransactionId().'-'.rand(0,999999),
+            'order_id'    => $this->getTransactionId(),
             'customer'    => $customer
         );
 
@@ -127,7 +124,7 @@ class PurchaseRequest extends AbstractRequest
 
         $charge = $openpay->charges->create($chargeRequest);
         if($type=='card') {
-            return $charge->payment_method->url;
+            return ['url' => $charge->payment_method->url];
         }
 
         if($this->getTestMode()) { 
@@ -137,12 +134,15 @@ class PurchaseRequest extends AbstractRequest
         }
 
         if($type=='bank_account') {
-            return "{$link}/spei-pdf/{$key}/{$charge->id}";
+            $link = "{$link}/spei-pdf/{$key}/{$charge->id}";
         }
         if($type=='store') {
-            return "{$link}/paynet-pdf/{$key}/{$charge->payment_method->reference}";
+            $link = "{$link}/paynet-pdf/{$key}/{$charge->payment_method->reference}";
         }
 
-        throw new \Exception("Method Incorrect, you should choose between card, bank_account and store", 1);
+        return [
+            'url' => $this->getReturnUrl(),
+            'file_url' => $link
+        ];
     }
 }
