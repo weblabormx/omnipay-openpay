@@ -11,45 +11,24 @@ use Omnipay\Common\Message\AbstractRequest;
 class PurchaseRequest extends AbstractRequest
 {
     /**
-     * Sets the request language.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setLanguage($value)
-    {
-        return $this->setParameter('language', $value);
-    }
-
-    /**
-     * Get the request language.
-     * @return $this
-     */
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-
-    /**
      * Sets the request account ID.
      *
      * @param string $value
      *
      * @return $this
      */
-    public function setAccountId($value)
+    public function setApiKey($value)
     {
-        return $this->setParameter('accountId', $value);
+        return $this->setParameter('apiKey', $value);
     }
 
     /**
      * Get the request account ID.
      * @return $this
      */
-    public function getAccountId()
+    public function getApiKey()
     {
-        return $this->getParameter('accountId');
+        return $this->getParameter('apiKey');
     }
 
     /**
@@ -73,22 +52,21 @@ class PurchaseRequest extends AbstractRequest
         return $this->getParameter('secretKey');
     }
 
-    /**
-     * Sets the request email.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
+    public function setName($value)
+    {
+        return $this->setParameter('name', $value);
+    }
+
+    public function getName()
+    {
+        return $this->getParameter('name');
+    }
+
     public function setEmail($value)
     {
         return $this->setParameter('email', $value);
     }
 
-    /**
-     * Get the request email.
-     * @return $this
-     */
     public function getEmail()
     {
         return $this->getParameter('email');
@@ -100,15 +78,10 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getData()
     {
-        $this->validate('language', 'amount', 'accountId', 'secretKey', 'email');
-
+        $this->validate('amount', 'returnUrl', 'apiKey', 'secretKey', 'testMode', 'description', 'paymentMethod', 'name', 'email');
+        $url = $this->processPayment();
         return [
-            'EDP_LANGUAGE'    => strtoupper($this->getLanguage()),
-            'EDP_REC_ACCOUNT' => $this->getAccountId(),
-            'EDP_DESCRIPTION' => $this->getDescription(),
-            'EDP_AMOUNT'      => $this->getAmount(),
-            'EDP_BILL_NO'     => $this->getTransactionId(),
-            'EDP_EMAIL'       => $this->getEmail(),
+            'url' => $url
         ];
     }
 
@@ -122,5 +95,53 @@ class PurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         return $this->response = new PurchaseResponse($this, $data);
+    }
+
+    public function processPayment() 
+    {
+        $openpay = \Openpay::getInstance($this->getApiKey(), $this->getSecretKey());
+        \Openpay::setProductionMode(!$this->getTestMode());
+        
+        $customer = array(
+            'name'  => $this->getParameter('name'),
+            'email' => $this->getParameter('email')
+        );
+        
+        $type = $this->getPaymentMethod();
+
+        // store, card, bank_account
+        $chargeRequest = array(
+            "method"      => $type,
+            'amount'      => (double) $this->getAmount(),
+            'description' => $this->getDescription(),
+            'send_email'  => false,
+            'order_id'    => $this->getTransactionId().'-'.rand(0,999999),
+            'customer'    => $customer
+        );
+
+        if($type=='card') {
+            $chargeRequest['confirm']      = false;
+            $chargeRequest['redirect_url'] = $this->getReturnUrl();
+        }
+
+        $charge = $openpay->charges->create($chargeRequest);
+        if($type=='card') {
+            return $charge->payment_method->url;
+        }
+
+        if(!$this->is_production) { 
+            $link = 'https://sandbox-dashboard.openpay.mx'; 
+        } else { 
+            $link = 'https://dashboard.openpay.mx';
+        }
+
+        if($type=='bank_account') {
+            return "{$link}/spei-pdf/{$this->key}/{$charge->id}";
+        }
+        if($type=='store') {
+            return "{$link}/paynet-pdf/{$this->key}/{$charge->payment_method->reference}";
+        }
+
+        throw new \Exception("Method Incorrect, you should choose between card, bank_account and store", 1);
     }
 }

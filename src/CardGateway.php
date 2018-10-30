@@ -118,7 +118,6 @@ class CardGateway extends AbstractGateway
      */
     public function purchase(array $options = array())
     {
-        dd($options);
         return $this->createRequest(PurchaseRequest::class, $options);
     }
 

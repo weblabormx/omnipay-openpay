@@ -15,7 +15,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      * Gateway endpoint
      * @var string
      */
-    protected $endpoint = 'https://money.idram.am/payment.aspx';
+    protected $endpoint;
 
     /**
      * Set successful to false, as transaction is not completed yet
@@ -41,7 +41,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function getRedirectUrl()
     {
-        return $this->endpoint;
+        return $this->data['url'];
     }
 
     /**
@@ -50,7 +50,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function getRedirectMethod()
     {
-        return 'POST';
+        return 'GET';
     }
 
     /**
@@ -59,6 +59,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function getRedirectData()
     {
-        return $this->data;
+        return [];
     }
 }
