@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
 /**
  * Braintree Gateway
  */
-class CardGateway extends AbstractGateway
+class Gateway extends AbstractGateway
 {
     /**
      * Get name
@@ -19,7 +19,7 @@ class CardGateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'OpenPay_Card';
+        return 'OpenPay';
     }
 
     /**
