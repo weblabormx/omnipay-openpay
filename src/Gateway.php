@@ -19,7 +19,7 @@ class Gateway extends AbstractGateway
      */
     public function getName()
     {
-        return 'OpenPay';
+        return 'OpenPay_Card';
     }
 
     /**
@@ -40,8 +40,9 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return [
-            'accountId' => '',
+            'apiKey' => '',
             'secretKey' => '',
+            'testMode' => false
         ];
     }
 
@@ -52,60 +53,18 @@ class Gateway extends AbstractGateway
      *
      * @return $this
      */
-    public function setLanguage($value)
+    public function setApiKey($value)
     {
-        return $this->setParameter('language', $value);
+        return $this->setParameter('apiKey', $value);
     }
 
     /**
      * Get the request language.
      * @return $this
      */
-    public function getLanguage()
+    public function getApiKey()
     {
-        return $this->getParameter('language');
-    }
-
-    /**
-     * Sets the request description.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDescription($value)
-    {
-        return $this->setParameter('description', $value);
-    }
-
-    /**
-     * Get the request description.
-     * @return $this
-     */
-    public function getDescription()
-    {
-        return $this->getParameter('description');
-    }
-
-    /**
-     * Sets the request account ID.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setAccountId($value)
-    {
-        return $this->setParameter('accountId', $value);
-    }
-
-    /**
-     * Get the request account ID.
-     * @return $this
-     */
-    public function getAccountId()
-    {
-        return $this->getParameter('accountId');
+        return $this->getParameter('apiKey');
     }
 
     /**
@@ -130,24 +89,24 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Sets the request email.
+     * Sets the request testMode.
      *
      * @param string $value
      *
      * @return $this
      */
-    public function setEmail($value)
+    public function setTestMode($value)
     {
-        return $this->setParameter('email', $value);
+        return $this->setParameter('testMode', $value);
     }
 
     /**
-     * Get the request email.
+     * Get the request testMode.
      * @return $this
      */
-    public function getEmail()
+    public function getTestMode()
     {
-        return $this->getParameter('email');
+        return $this->getParameter('testMode');
     }
 
     /**
@@ -159,6 +118,7 @@ class Gateway extends AbstractGateway
      */
     public function purchase(array $options = array())
     {
+        dd($options);
         return $this->createRequest(PurchaseRequest::class, $options);
     }
 
