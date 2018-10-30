@@ -1,12 +1,12 @@
 <?php
 
-namespace WeblaborMx\OmniPayOpenPay\Message;
+namespace Omnipay\OpenPay\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
  * Class CompletePurchaseResponse
- * @package WeblaborMx\OmniPayOpenPay\Message
+ * @package Omnipay\OpenPay\Message
  */
 class CompletePurchaseResponse extends AbstractResponse
 {

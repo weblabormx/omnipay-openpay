@@ -21,7 +21,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "WeblaborMx\\OmniPayOpenPay\\": "src/"
+            "Omnipay\\OpenPay\\": "src/"
         }
     },
     "require": {

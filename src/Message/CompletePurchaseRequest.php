@@ -1,12 +1,12 @@
 <?php
 
-namespace WeblaborMx\OmniPayOpenPay\Message;
+namespace Omnipay\OpenPay\Message;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Class CompletePurchaseRequest
- * @package WeblaborMx\OmniPayOpenPay\Message
+ * @package Omnipay\OpenPay\Message
  */
 class CompletePurchaseRequest extends PurchaseRequest
 {
@@ -24,7 +24,7 @@ class CompletePurchaseRequest extends PurchaseRequest
      *
      * @param mixed $data
      *
-     * @return \Omnipay\Common\Message\ResponseInterface|\WeblaborMx\OmniPayOpenPay\Message\CompletePurchaseResponse
+     * @return \Omnipay\Common\Message\ResponseInterface|\Omnipay\OpenPay\Message\CompletePurchaseResponse
      */
     public function sendData($data)
     {

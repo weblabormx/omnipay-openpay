@@ -1,17 +1,17 @@
 <?php
 
-namespace WeblaborMx\OmniPayOpenPay;
+namespace Omnipay\OpenPay;
 
 use Omnipay\Common\Http\ClientInterface;
 use Omnipay\Common\AbstractGateway;
-use WeblaborMx\OmniPayOpenPay\Message\CompletePurchaseRequest;
-use WeblaborMx\OmniPayOpenPay\Message\PurchaseRequest;
+use Omnipay\OpenPay\Message\CompletePurchaseRequest;
+use Omnipay\OpenPay\Message\PurchaseRequest;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Braintree Gateway
  */
-class Gateway extends AbstractGateway
+class CardGateway extends AbstractGateway
 {
     /**
      * Get name
